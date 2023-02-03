@@ -10,7 +10,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'ansalemo-devops-acr'
+  dockerRegistryServiceConnection: 'ansalemo-devops-wafc-sp'
   imageRepository: 'wafcdevops'
   containerRegistry: 'ansalemocontainerregistry.azurecr.io'
   dockerfilePath: './azure-devops/Dockerfile'
