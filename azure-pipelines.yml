@@ -29,14 +29,11 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - task: Docker@2
-      displayName: Build and push an image to container registry
       inputs:
-        command: buildAndPush
+        containerRegistry: 'ansalemo-devops-wafc-sp'
         repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+        command: 'buildAndPush'
+        Dockerfile: './azure-devops/Dockerfile'
 
 - stage: Deploy
   displayName: Deploy
