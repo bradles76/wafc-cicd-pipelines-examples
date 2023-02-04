@@ -55,3 +55,4 @@ stages:
         DockerNamespace: '$(containerRegistry)'
         DockerRepository: '$(imageRepository)'
         DockerImageTag: '$(tag)'
+        AppSettings: '-WEBSITES_PORT 3000'
