@@ -28,7 +28,9 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - script: cd $(Build.SourcesDirectory)/azure-devops
+    - script: |
+        ls -lrta
+        ./azure-devops
       displayName: 'Changing into local source directory'
 
     - task: Docker@2
