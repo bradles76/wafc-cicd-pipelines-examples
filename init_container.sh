@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 
 node /usr/src/app/server.js
