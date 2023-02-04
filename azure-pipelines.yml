@@ -30,7 +30,7 @@ stages:
     steps:
     - script: |
         ls -lrta
-        ./azure-devops
+        cd ./azure-devops
       displayName: 'Changing into local source directory'
 
     - task: Docker@2
