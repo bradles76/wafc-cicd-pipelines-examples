@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: 'e2b82f00-3757-4e90-8244-5fca53e66fc3'
   imageRepository: 'ajsalemowafcdevopspipelinesexamples'
   containerRegistry: 'ansalemoacr.azurecr.io'
-  dockerfilePath: '.'
+  dockerfilePath: './Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
