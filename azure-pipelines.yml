@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: 'e2b82f00-3757-4e90-8244-5fca53e66fc3'
   imageRepository: 'ajsalemowafcdevopspipelinesexamples'
   containerRegistry: 'ansalemoacr.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/azure-devops/Dockerfile'
+  dockerfilePath: '.'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
@@ -28,6 +28,9 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+    - script: cd $(Build.SourcesDirectory)/azure-devops
+      displayName: 'Changing into local source directory'
+
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
