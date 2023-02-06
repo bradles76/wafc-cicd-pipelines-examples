@@ -49,7 +49,7 @@ jobs:
     - uses: azure/appservice-settings@v1
       with:
         app-name: 'ansalemo-wafc-ghactions'
-        app-settings-json: '[{ "name": "WEBSITES_PORT": 3000 }]'
+        app-settings-json: '[{ "WEBSITES_PORT": "3000" }]'
 
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
