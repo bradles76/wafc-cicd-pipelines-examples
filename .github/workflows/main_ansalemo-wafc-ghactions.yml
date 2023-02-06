@@ -20,7 +20,7 @@ jobs:
       uses: docker/setup-buildx-action@v1
 
     - name: Log in to registry
-      run: docker login ansalemoacr.azurecr.io --username $SP_APP_ID --password $SP_PASSWD
+      run: docker login ansalemoacr.azurecr.io --username {{ secrets.SP_APP_ID }} --password {{ secrets.SP_PASSWD }}
       
 
     - name: Build and push container image to registry
