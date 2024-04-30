@@ -42,7 +42,7 @@ stages:
       inputs:
        apiToken: '$(TENABLE_API_TOKEN)'
        apiUrl: 'https://au.app.ermetic.com'
-       name: 'bradleswafccicdpipelinesexamples'
+       name: 'angularappab'
        registryPassword: '$(ACR_PASSWORD)'
        registryUsername: 'angularappab'
 
