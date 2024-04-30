@@ -1,0 +1,60 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'e13b97b3-1140-4a13-b69d-40dc4be34f28'
+  imageRepository: 'bradleswafccicdpipelinesexamples'
+  containerRegistry: 'angularappab.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/azure-devops/Dockerfile'
+  tag: '$(Build.BuildId)'
+  
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+- stage: Deploy
+  displayName: Deploy
+  jobs:
+  - job: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'Azure subscription AB(269b82d4-ef3b-4129-a3b0-a605cc76352c)'
+        appType: 'webAppContainer'
+        WebAppName: 'LinuxApp'
+        DockerNamespace: 'angularappab.azurecr.io'
+        DockerRepository: '$(imageRepository)'
+        DockerImageTag: '$(tag)'
+        # NOTE: If your container is not listening on port 80
+        # Then it's highly recommended to explicitly set this App Setting to the port exposed in your Dockerfile
+        AppSettings: '-WEBSITES_PORT 3000'
