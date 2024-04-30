@@ -38,6 +38,14 @@ stages:
         tags: |
           $(tag)
 
+    - task: ErmeticContainerImageScan@1
+      inputs:
+       apiToken: '$(TENABLE_API_TOKEN)'
+       apiUrl: 'https://au.app.ermetic.com'
+       name: 'bradleswafccicdpipelinesexamples'
+       registryPassword: '$(ACR_PASSWORD)'
+       registryUsername: 'angularappab'
+
 - stage: Deploy
   displayName: Deploy
   jobs:
